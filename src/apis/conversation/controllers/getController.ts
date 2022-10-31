@@ -18,7 +18,7 @@ export async function getMyChatsControl(
     const reqSchema = Joi.object({
       projectId: Joi.string().required(),
     });
-    const { projectId: project_id } = await validateRequest(reqSchema, {
+    const { projectId: project_id } = await validateRequest<{projectId: string}>(reqSchema, {
       projectId,
     });
     const result = await getMyChatsService(req.user.id, project_id);
