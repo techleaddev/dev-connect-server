@@ -14,6 +14,7 @@ export async function createTodoController(
   const reqSchema = Joi.object<ICreateTodoReq>({
     title: Joi.string().min(1).required(),
     description: Joi.string().required(),
+    deadline: Joi.string(),
   });
   
   try {

@@ -33,6 +33,14 @@ export async function createProjectService(
   return project;
 }
 
+export async function deleteProjectService(projectId: string, userId: string) {
+  const currentProject = await projectModel.findOne({_id: projectId, 'originator.id': userId})
+  if(!currentProject){
+    throw new HttpException(401, 'You are not project leader');
+  }
+  return await projectModel.findByIdAndDelete(projectId);
+}
+
 export async function createTagTaskService(projectId: string, title: string) {
   const tag = await tagTaskModel.create({ projectId, title });
   return tag;

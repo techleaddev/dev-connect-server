@@ -40,8 +40,8 @@ export async function deleteMemberController(
   next: NextFunction
 ) {
   try {
-    const { projectId, memberId } = req.body;
-    const response = await deleteMemberService(projectId, memberId);
+    const { projectId, memberId } = req.query;
+    const response = await deleteMemberService(String(projectId || ''), String(memberId || ''));
     res.status(201).json(response);
   } catch (error) {
     next(error);

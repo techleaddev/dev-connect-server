@@ -4,6 +4,7 @@ import {
   createProjectController,
   createStatusTaskController,
   createTagTaskControl,
+  deleteProjectController,
 } from './controllers/postController';
 import {
   getInfoProjectController,
@@ -23,6 +24,7 @@ const projectPath = '/project';
 
 projectRouter
   .post(projectPath, authMiddleware, createProjectController)
+  .delete(projectPath + '/:id', authMiddleware, deleteProjectController)
   .post(projectPath + '/tag', authMiddleware, createTagTaskControl)
   .post(projectPath + '/status', authMiddleware, createStatusTaskController);
 
@@ -42,7 +44,7 @@ projectRouter
   .put(projectPath + '/:id', authMiddleware, editProjectController);
 
 projectRouter.delete(
-  projectPath + '/member',
+  projectPath + '-detail' + '/member',
   authMiddleware,
   deleteMemberController
 );

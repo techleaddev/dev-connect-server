@@ -7,6 +7,7 @@ import {
   createProjectService,
   createStatusTaskService,
   createTagTaskService,
+  deleteProjectService,
 } from '../services/postService';
 
 export async function createProjectController(
@@ -30,6 +31,20 @@ export async function createProjectController(
     next(error);
   }
 }
+
+export async function deleteProjectController(req: Request,
+  res: Response,
+  next: NextFunction) {
+  try {
+    const projectId = req.params.id;
+    const userId = req.user.id;
+    await deleteProjectService(projectId, userId);
+    return res.status(204).json();
+  } catch (error) {
+    next(error);
+  }
+}
+
 
 export async function createTagTaskControl(
   req: Request,
